@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+    <class name="xyz.merccurion.Employee" table="EMPLOYEE">
+        <meta attribute="class-description">
+            This class contains employee details.
+        </meta>
+
+        <id name="id" type="int" column="id">
+            <generator class="native"/>
+        </id>
+
+        <component name="name" class="xyz.merccurion.Name">
+            <property name="lastName" column="last_name" type="string"/>
+            <property name="firstName" column="first_name" type="string"/>
+            <property name="middleName" column="middle_name" type="string"/>
+            <property name="suffix" column="suffix" type="string"/>
+            <property name="title" column="title" type="string"/>
+        </component>
+            
+        <component name="address" class="xyz.merccurion.Address">
+            <property name="streetNo" column="street_no" type="int"/>
+            <property name="barangay" column="barangay" type="string"/>
+            <property name="city" column="city" type="string"/>
+            <property name="zip" column="zip" type="int"/>
+        </component>
+        
+        <component name="other" class="xyz.merccurion.OtherInfo">
+            <property name="birthday" column="birthday" type="string"/>
+            <property name="gwa" column="gwa" type="double"/>
+            <property name="hireDate" column="hire_date" type="string"/>
+            <property name="hireStatus" column="hire_status" type="boolean"/>
+        </component>
+        
+        <component name="contact" class="xyz.merccurion.Contact">
+            <property name="landline" column="landline" type="int"/>
+            <property name="mobile" column="mobile" type="int"/>
+            <property name="email" column="email" type="string"/>
+        </component>
+
+        <set name="roles" cascade="all">
+            <key column="employee_id"/>
+            <one-to-many class="Roles"/>
+        </set>
+               
+    </class>
+
+    <class name="xyz.merccurion.Roles" table="ROLES">
+        <meta attribute="class-description">
+            This class contains employee roles.
+        </meta>
+
+        <id name="id" type="int" column="id">
+            <generator class="native"/>
+        </id>
+
+        <property name="role" column="role" type="string"/>
+    </class>
+</hibernate-mapping>
