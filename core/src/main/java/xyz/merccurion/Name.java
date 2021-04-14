@@ -8,6 +8,7 @@ public class Name {
     private String title;
 
     public Name() {}
+    
     public Name(String lastName, String firstName, String middleName, String suffix, String title) {
         this.lastName = lastName;
         this.firstName = firstName;

@@ -1,7 +1,5 @@
 package xyz.merccurion;
 
-import java.util.HashSet;
-
 public class Main {
     public static void main(String[] args) {
         Util util = new Util();
@@ -11,10 +9,21 @@ public class Main {
         MEService service = new MEService();
         ManageEmployee me = new ManageEmployee();
         switch(choose) {
-            case 1:
+            case 1: // create employee
                 Employee employee = service.addEmployeeDetails();
-                HashSet<Roles> roles = service.addEmployeeRoles();
-                me.addEmployee(employee,roles);
+                me.addEmployeeDetails(employee);
+
+                Roles roles = new Roles();
+
+                do {
+                    roles = service.addEmployeeRoles();
+                    if (roles.getRole().equalsIgnoreCase("e")) break;
+                    employee.getRoles().add(roles);
+                    me.addRoles(roles);
+                    
+                } while (!roles.getRole().equalsIgnoreCase("e"));
+                me.updateEmployee(employee);
+                
 
         }
     }

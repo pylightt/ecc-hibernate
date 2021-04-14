@@ -1,5 +1,6 @@
 package xyz.merccurion;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 
@@ -8,13 +9,13 @@ public class Employee {
 
     private Name name;
     private Address address;
-    private OtherInfo other;
+    private Other other;
     private Contact contact;
-    private Set<Roles> roles;
+    private Set<Roles> roles = new LinkedHashSet<Roles>();
 
     public Employee() {};
 
-    public Employee(Name name, Address address, OtherInfo other, Contact contact) {
+    public Employee(Name name, Address address, Other other, Contact contact) {
         this.name = name;
         this.address = address;
         this.other = other;
@@ -24,7 +25,7 @@ public class Employee {
     public int getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(int id) { 
         this.id = id;
     }
    
@@ -42,10 +43,10 @@ public class Employee {
         this.address = address;
     }
 
-    public OtherInfo getOtherInfo() {
+    public Other getOther() {
         return other;
     }
-    public void setOtherInfo(OtherInfo other){
+    public void setOther(Other other){
         this.other = other;
     }
 

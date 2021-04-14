@@ -1,32 +1,29 @@
 package xyz.merccurion;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
 import java.io.File;
 import java.util.Scanner;
 
 public class Util {
-    private SessionFactory sessionFactory;
+    private SessionFactory factory;
 
     private Scanner scan = new Scanner(System.in);
 
     public Util() {}
 
     public SessionFactory getSessionFactory() {
-        File directory = new File("./infra/src/main/resources/hibernate.cfg.xml");
-        Configuration configuration = new Configuration().configure(directory);
-
-        StandardServiceRegistryBuilder srb = new StandardServiceRegistryBuilder();
-        
-        ServiceRegistry serviceRegistry = srb.applySettings(configuration.getProperties()).build();
-        sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-        
-        return sessionFactory;
+        try {
+            File directory = new File("./infra/src/main/resources/hibernate.cfg.xml");
+            factory = new Configuration().configure(directory).buildSessionFactory();
+         } catch (Throwable ex) { 
+            System.err.println("Failed to create sessionFactory object." + ex);
+            throw new ExceptionInInitializerError(ex); 
+         }
+         return factory;
     }
-
+   
     public String getString(String text) {
         System.out.print(text);
         String str = scan.nextLine();
@@ -40,18 +37,13 @@ public class Util {
     }
 
     public double getDouble(String text) {
-        System.out.printf(text);
+        System.out.print(text);
         double value = Double.parseDouble(scan.nextLine());
         return value;
     }
 
-    public long getLong(String text) {
-        System.out.print(text);
-        long value = Long.parseLong(scan.nextLine());
-        return value;
-    }
     public boolean getBoolean(String text) {
-        System.out.printf(text);
+        System.out.print(text);
         String result = scan.nextLine();
         boolean isHired = true;
         if (result.equalsIgnoreCase("Y")) {

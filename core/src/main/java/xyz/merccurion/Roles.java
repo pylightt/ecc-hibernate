@@ -1,6 +1,7 @@
 package xyz.merccurion;
 
 public class Roles {
+    
     private int id;
     private String role;
 
@@ -16,10 +17,10 @@ public class Roles {
     public void setId(int id) {
         this.id = id;
     }
-    public String getRoles() {
+    public String getRole() {
         return role;
     }
-    public void setRoles(String role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
@@ -28,7 +29,7 @@ public class Roles {
         if (!this.getClass().equals(obj.getClass())) return false;
 
         Roles obj2 = (Roles)obj;
-        if ((this.id == obj2.getId()) && (this.role.equals(obj2.getRoles()))) {
+        if ((this.id == obj2.getId()) && (this.role.equals(obj2.getRole()))) {
             return true;
         }
         return false;

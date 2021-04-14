@@ -3,17 +3,17 @@
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
 
-<hibernate-mapping>
-    <class name="xyz.merccurion.Employee" table="EMPLOYEE">
+<hibernate-mapping package="xyz.merccurion">
+    <class name="Employee" table="employee">
         <meta attribute="class-description">
             This class contains employee details.
         </meta>
 
         <id name="id" type="int" column="id">
-            <generator class="native"/>
+            <generator class="increment"/>
         </id>
 
-        <component name="name" class="xyz.merccurion.Name">
+        <component name="name" class="Name">
             <property name="lastName" column="last_name" type="string"/>
             <property name="firstName" column="first_name" type="string"/>
             <property name="middleName" column="middle_name" type="string"/>
@@ -21,23 +21,23 @@
             <property name="title" column="title" type="string"/>
         </component>
             
-        <component name="address" class="xyz.merccurion.Address">
-            <property name="streetNo" column="street_no" type="int"/>
+        <component name="address" class="Address">
+            <property name="streetNo" column="street_no" type="string"/>
             <property name="barangay" column="barangay" type="string"/>
             <property name="city" column="city" type="string"/>
             <property name="zip" column="zip" type="int"/>
         </component>
         
-        <component name="other" class="xyz.merccurion.OtherInfo">
+        <component name="other" class="Other">
             <property name="birthday" column="birthday" type="string"/>
             <property name="gwa" column="gwa" type="double"/>
             <property name="hireDate" column="hire_date" type="string"/>
-            <property name="hireStatus" column="hire_status" type="boolean"/>
+            <property name="isHired" column="hire_status" type="boolean"/>
         </component>
         
-        <component name="contact" class="xyz.merccurion.Contact">
-            <property name="landline" column="landline" type="int"/>
-            <property name="mobile" column="mobile" type="int"/>
+        <component name="contact" class="Contact">
+            <property name="landline" column="landline" type="string"/>
+            <property name="mobile" column="mobile" type="string"/>
             <property name="email" column="email" type="string"/>
         </component>
 
@@ -48,15 +48,16 @@
                
     </class>
 
-    <class name="xyz.merccurion.Roles" table="ROLES">
+    <class name="Roles" table="roles">
         <meta attribute="class-description">
             This class contains employee roles.
         </meta>
 
         <id name="id" type="int" column="id">
-            <generator class="native"/>
+            <generator class="increment"/>
         </id>
 
         <property name="role" column="role" type="string"/>
+
     </class>
 </hibernate-mapping>

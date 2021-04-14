@@ -2,21 +2,21 @@ package xyz.merccurion;
 
 public class Contact {
 
-    private int landline;
+    private String landline;
     private String mobile;
     private String email;
 
     public Contact() {}
-    public Contact(int landline, String mobile, String email){
+    public Contact(String landline, String mobile, String email){
         this.landline = landline;
         this.mobile = mobile;
         this.email = email;
     }
 
-    public int getLandline() {
+    public String getLandline() {
         return landline;
     }
-    public void setLandline(int landline) {
+    public void setLandline(String landline) {
         this.landline = landline;
     }
 

@@ -1,23 +1,23 @@
 package xyz.merccurion;
 
 public class Address {
-    private int streetNo;
+    private String streetNo;
     private String barangay;
     private String city;
     private int zip;
 
     public Address() {}
-    public Address(int streetNo, String barangay, String city, int zip) {
+    public Address(String streetNo, String barangay, String city, int zip) {
         this.streetNo = streetNo;
         this.barangay = barangay;
         this.city = city;
         this.zip = zip;
     }
     
-    public int getStreetNo() {
+    public String getStreetNo() {
         return streetNo;
     }
-    public void setStreetNo(int streetNo) {
+    public void setStreetNo(String streetNo) {
         this.streetNo = streetNo;
     }
 

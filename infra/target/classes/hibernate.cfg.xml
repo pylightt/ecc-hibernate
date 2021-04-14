@@ -13,7 +13,7 @@
         <property name="connection_pool_size">1</property>
         <property name="show_sql">true</property>
 
-        <mapping resource=".infra/src/main/resources/Employee.hbm.xml"/>
+        <mapping resource="Employee.hbm.xml"/>
 
     </session-factory>
 </hibernate-configuration>

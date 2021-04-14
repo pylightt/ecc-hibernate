@@ -1,35 +1,47 @@
 package xyz.merccurion;
 
-import java.util.Set;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 public class ManageEmployee {
+    
     Util util = new Util();
 
     private SessionFactory factory;
     private Session session;
     private Transaction transaction;
 
-    public Integer addEmployee(Employee employee, Set<Roles> roles) {
+    public void addEmployeeDetails(Employee employee) {
         factory = util.getSessionFactory();
         session = factory.openSession();
-        // transaction = null;
-        Integer employeeID = null;
-        
-       
         transaction = session.beginTransaction();
-        // employee.setRoles(roles);
-        //employeeID = (Integer) 
+
         session.save(employee);
         transaction.commit();
 
         session.close();
-    
-        return employeeID;
     }
-    
 
+    public void addRoles(Roles roles) {
+        factory = util.getSessionFactory();
+        session = factory.openSession();           
+        transaction = session.beginTransaction();
+
+        session.save(roles);
+        transaction.commit();
+
+        session.close();
+    }
+
+    public void updateEmployee(Employee employee) {
+        factory = util.getSessionFactory();
+        session = factory.openSession();           
+        transaction = session.beginTransaction();
+
+        session.update(employee);
+        transaction.commit();
+
+        session.close();
+    }
 }
