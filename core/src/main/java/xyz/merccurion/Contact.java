@@ -1,8 +1,5 @@
 package xyz.merccurion;
 
-// import java.util.LinkedHashSet;
-// import java.util.Set;
-
 public class Contact {
 
     private int contactid;

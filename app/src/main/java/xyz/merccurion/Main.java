@@ -1,5 +1,7 @@
 package xyz.merccurion;
 
+import java.util.Set;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -24,11 +26,8 @@ public class Main {
 
     static void menu(int choose) {
         EmployeeService eService = new EmployeeService();
-        EmployeeDao eDao = new EmployeeDao();
         ContactService cService = new ContactService();
-        ContactDao cDao = new ContactDao();
         RolesService rService = new RolesService();
-        RolesDao rDao = new RolesDao();
 
         Util util = new Util();
 
@@ -41,7 +40,7 @@ public class Main {
                 contact.setEmployee(employee);
                 employee.getContact().add(contact);
                 cService.addContact(contact);
-                eDao.updateEmployee(employee);
+                eService.updateEmployee(employee);
 
                 Roles role = new Roles();
                 do {
@@ -50,7 +49,7 @@ public class Main {
                     employee.getRoles().add(role);
                     rService.addRole(role);
                 } while (!role.getRole().equalsIgnoreCase("e"));
-                eDao.updateEmployee(employee);
+                eService.updateEmployee(employee);
                 break;
 
             case 2: // delete employee
@@ -63,8 +62,35 @@ public class Main {
             case 3: // update employee
             case 4: // list employees
             case 5: // add employee role
+                int employeeIdAddRole = util.getInt("Enter employee's id to add role to: ");
+                int roleId = util.getInt("Enter role id to add to employee: ");
+                try {
+                    Employee employeeAddRole = eService.getEmployee(employeeIdAddRole);
+                    Roles roleToAdd = rService.getRole(roleId);
+                    Set<Roles> roleSet = employeeAddRole.getRoles();
+                    roleSet.add(roleToAdd);
+                    eService.updateEmployee(employeeAddRole);
+                } catch(Exception e) {}
+                break;
             case 6: // delete employee role
             case 7: // add contact
+                int employeeIdAddContact =  util.getInt("Enter employee's id to add contact to: ");
+                try {
+                    Employee employeeAddContact = eService.getEmployee(employeeIdAddContact);
+                   
+                    Contact contactToAdd =cService.addContactDetails();
+                    contactToAdd.setEmployee(employeeAddContact);
+                    Set<Contact> contactSet = employeeAddContact.getContact();
+                    contactSet.add(contactToAdd);
+                    cService.addContact(contactToAdd);
+                    eService.updateEmployee(employeeAddContact);
+
+                } catch(Exception e) {
+                    System.out.println("Invalid input");
+                    e.printStackTrace();
+                    menu(choose);
+                }
+                break;
             case 8: // update contact
             case 9: // delte contact
             case 10: // add role

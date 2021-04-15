@@ -23,6 +23,18 @@ public class RolesDao {
         session.close();
     }
 
+    public Roles getRole(int id) {
+        factory = util.getSessionFactory();
+        session = factory.openSession();           
+        transaction = session.beginTransaction();
+
+        Roles role = (Roles) session.get(Roles.class, id);
+       
+        transaction.commit();
+        session.close();
+        return role;
+    }
+
     public void updateRole(Roles role) {
         factory = util.getSessionFactory();
         session = factory.openSession();           

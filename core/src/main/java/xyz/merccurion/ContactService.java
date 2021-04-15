@@ -6,13 +6,14 @@ public class ContactService {
 
     public Contact addContactDetails() {
 
-        // String landline = util.getString("Landline: ");
-        // String mobile = util.getString("Mobile: ");
-        // String email = util.getString("email: ");
+        String landline = util.getString("Landline: ");
+        String mobile = util.getString("Mobile: ");
+        String email = util.getString("email: ");
 
-        String landline = "375-1495";
-        String mobile = "09152435453";
-        String email = "jlacson@exist.com";
+        // String landline = "375-1495";
+        // String mobile = "09152435453";
+        // String email = "jlacson@exist.com";
+
         Contact contact = new Contact(landline,mobile,email);
 
         return contact;

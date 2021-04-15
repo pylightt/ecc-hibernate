@@ -14,4 +14,10 @@ public class RolesService {
         rDao.addRole(role);
     }
     
+    public Roles getRole(int id) {
+        RolesDao rDao = new RolesDao();
+        Roles role = rDao.getRole(id);
+        return role;
+    }
+    
 }
