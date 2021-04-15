@@ -23,4 +23,43 @@ public class ContactService {
         ContactDao cDao = new ContactDao();
         cDao.addContact(contact);
     }
+
+    public Contact getContact(int id) {
+        ContactDao cDao = new ContactDao();
+        Contact contact = cDao.getContact(id);
+        return contact;
+    }
+
+    public void deleteContact(int id) {
+        ContactDao cDao = new ContactDao();
+        Contact contact = cDao.getContact(id);
+        cDao.deleteContact(contact);
+    }
+
+    public Contact updateContactDetails(Contact contact, int id) {
+        String update;
+        
+        switch(id) {
+            case 1: // landline
+                update = util.getString("Updated landline: ");
+                contact.setLandline(update);
+                break;
+            
+            case 2: // mobile
+                update = util.getString("Updated mobile: ");
+                contact.setMobile(update);
+                break;
+
+            case 3: // email
+                update = util.getString("Updated email: ");
+                contact.setEmail(update);
+                break;
+
+        }
+        ContactDao cDao = new ContactDao();
+        cDao.updateContact(contact);
+        return contact;
+    }
+
+    
 }

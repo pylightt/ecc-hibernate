@@ -40,7 +40,7 @@
             <one-to-many class="Contact"/>
         </set>
         
-        <set name="roles" table="employee_roles" lazy="false" cascade="all">
+        <set name="roles" table="employee_roles" lazy="false" cascade="persist,merge">
             <key column="employee_id"/>
             <many-to-many column="role_id" class="Roles"/>
         </set>          

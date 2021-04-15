@@ -1,5 +1,7 @@
 package xyz.merccurion;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -54,5 +56,17 @@ public class RolesDao {
         transaction.commit();
 
         session.close();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Roles> listRoles() {
+        factory = util.getSessionFactory();
+        session = factory.openSession();           
+        transaction = session.beginTransaction();
+
+        List<Roles> rolesList = (List<Roles>) session.createQuery("FROM Roles").list();
+        transaction.commit();
+        session.close();
+        return rolesList;
     }
 }

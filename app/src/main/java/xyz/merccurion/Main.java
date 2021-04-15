@@ -1,5 +1,6 @@
 package xyz.merccurion;
 
+import java.util.List;
 import java.util.Set;
 
 public class Main {
@@ -60,7 +61,18 @@ public class Main {
                 break;
 
             case 3: // update employee
+                int updateId = util.getInt("Enter employee's id to udpate: ");
+                employeeUpdateOptions();
+                int chooseUpdate = util.getInt("Choose entry to update: ");
+
+                try {
+                    Employee employeeDetails = eService.getEmployee(updateId);
+                    eService.updateEmployeeDetails(employeeDetails, chooseUpdate);
+                } catch(Exception e) {}
+                break;
+            
             case 4: // list employees
+            
             case 5: // add employee role
                 int employeeIdAddRole = util.getInt("Enter employee's id to add role to: ");
                 int roleId = util.getInt("Enter role id to add to employee: ");
@@ -72,8 +84,19 @@ public class Main {
                     eService.updateEmployee(employeeAddRole);
                 } catch(Exception e) {}
                 break;
+
             case 6: // delete employee role
-                
+                int employeeIdDeleteRole = util.getInt("Enter employee's id delete role from: ");
+                int roleIdToDelete = util.getInt("Enter role id to delete from employee: ");
+                try {
+                    Employee employeeDeleteRole = eService.getEmployee(employeeIdDeleteRole);
+                    Roles roleToDelete = rService.getRole(roleIdToDelete);
+                    Set<Roles> roleSetForDelete = employeeDeleteRole.getRoles();
+                    roleSetForDelete.remove(roleToDelete);
+                    eService.updateEmployee(employeeDeleteRole);
+                } catch (Exception e) {}
+                break;
+
             case 7: // add contact
                 int employeeIdAddContact =  util.getInt("Enter employee's id to add contact to: ");
                 try {
@@ -93,7 +116,22 @@ public class Main {
                 }
                 break;
             case 8: // update contact
-            case 9: // delte contact
+                int updateContactId = util.getInt("Enter contact id to update: ");
+                try {
+                    Contact contactDetails = cService.getContact(updateContactId);
+
+                    contactUpdateOptions();
+                    int chooseContactUpdate = util.getInt("Choose entry to update: ");
+                    cService.updateContactDetails(contactDetails, chooseContactUpdate);
+                } catch(Exception e) {}
+                break;
+            case 9: // delete contact
+                int deleteContactId = util.getInt("Enter contact id for deletion: ");
+                try {
+                    cService.deleteContact(deleteContactId);
+                } catch (Exception e) {}
+                break;
+
             case 10: // add role
                 Roles newRole = new Roles();
                 do {
@@ -103,6 +141,12 @@ public class Main {
                 } while (!newRole.getRole().equalsIgnoreCase("e"));
                 break;
             case 11: // update role
+                int updateRoleId = util.getInt("Enter role id to update: ");
+                try {
+                    Roles roleDetails = rService.getRole(updateRoleId);
+                    rService.updateRole(roleDetails);
+                } catch(Exception e) {}
+                break;
             case 12: // delete role
                 int deleteRoleId = util.getInt("Enter role id for deletion: ");
                 try {
@@ -110,7 +154,12 @@ public class Main {
                 } catch (Exception e) {}
                 break;
             case 13: // list role
-
+                List<Roles> rolesList = rService.listRoles();
+                for(Roles roles : rolesList) {
+                    System.out.println("Role ID: " + roles.getRoleid() + 
+                                        "\tRole: " + roles.getRole());
+                }
+                break;
             case 14: // exit menu
                 System.exit(0);  
 
@@ -119,7 +168,7 @@ public class Main {
     
 
     static void menuOptions() {
-        String text = 
+        String text = "\n" +
             " 1: Create Employee\n" +
             " 2: Delete Employee\n" +
             " 3: Update Employee\n" +
@@ -132,9 +181,37 @@ public class Main {
             "10: Add Role\n" +
             "11: Update Role\n" +
             "12: Delete Role\n" +
-            "13: List Role\n" +
-            "14: Exit Menu\n\n";
+            "13: List Roles\n" +
+            "14: Exit Menu\n";
         
-        System.out.print(text);
+        System.out.println(text);
+    }
+
+    static void employeeUpdateOptions() {
+        String text = "\n" +
+            " 1: Last name\n" +
+            " 2: First name\n" +
+            " 3: Middle name\n" + 
+            " 4: Suffix\n" +
+            " 5: Title\n" +
+            " 6: Street no.\n" +
+            " 7: Barangay\n" +
+            " 8: City\n" +
+            " 9: Zip code\n" +
+            "10: Birthday\n" +
+            "11: GWA\n" +
+            "12: Hire date\n" +
+            "13: Employment status\n";
+
+        System.out.println(text);
+    }
+
+    static void contactUpdateOptions() {
+        String text = "\n" +
+                "1: Landline\n" +
+                "2: Mobile\n" +
+                "3: email\n";
+
+        System.out.println(text);
     }
 }
