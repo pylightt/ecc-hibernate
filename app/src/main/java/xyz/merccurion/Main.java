@@ -73,6 +73,7 @@ public class Main {
                 } catch(Exception e) {}
                 break;
             case 6: // delete employee role
+                
             case 7: // add contact
                 int employeeIdAddContact =  util.getInt("Enter employee's id to add contact to: ");
                 try {
@@ -94,15 +95,24 @@ public class Main {
             case 8: // update contact
             case 9: // delte contact
             case 10: // add role
+                Roles newRole = new Roles();
+                do {
+                    newRole =  rService.addRoleDetails();
+                    if (newRole.getRole().equalsIgnoreCase("e")) break;
+                    rService.addRole(newRole);
+                } while (!newRole.getRole().equalsIgnoreCase("e"));
+                break;
             case 11: // update role
             case 12: // delete role
+                int deleteRoleId = util.getInt("Enter role id for deletion: ");
+                try {
+                    rService.deleteRole(deleteRoleId);
+                } catch (Exception e) {}
+                break;
             case 13: // list role
 
             case 14: // exit menu
-                System.exit(0);
-        
-            
-                
+                System.exit(0);  
 
         }
     }

@@ -23,6 +23,16 @@ public class RolesDao {
         session.close();
     }
 
+    public void deleteRole(Roles role) {
+        factory = util.getSessionFactory();
+        session = factory.openSession();           
+        transaction = session.beginTransaction();
+
+        session.delete(role);
+        transaction.commit();
+        session.close();
+    }
+
     public Roles getRole(int id) {
         factory = util.getSessionFactory();
         session = factory.openSession();           

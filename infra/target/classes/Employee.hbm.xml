@@ -73,7 +73,7 @@
 
         <property name="role" column="role" type="string"/>
 
-        <set name="employee" table="employee_roles" lazy="false" cascade="all">
+        <set name="employee" table="employee_roles" lazy="false" cascade="persist,merge">
             <key column="role_id"/>
             <many-to-many column="employee_id" class="Employee"/>
                 
