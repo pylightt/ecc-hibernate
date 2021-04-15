@@ -1,8 +1,12 @@
 xyz\merccurion\Contact.class
-xyz\merccurion\MEService.class
 xyz\merccurion\Address.class
 xyz\merccurion\Name.class
-xyz\merccurion\ManageEmployee.class
+xyz\merccurion\RolesDao.class
+xyz\merccurion\RolesService.class
+xyz\merccurion\ContactService.class
+xyz\merccurion\ContactDao.class
 xyz\merccurion\Other.class
+xyz\merccurion\EmployeeDao.class
 xyz\merccurion\Roles.class
+xyz\merccurion\EmployeeService.class
 xyz\merccurion\Employee.class

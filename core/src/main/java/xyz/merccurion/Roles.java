@@ -1,9 +1,13 @@
 package xyz.merccurion;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 public class Roles {
     
-    private int id;
+    private int roleid;
     private String role;
+    private Set<Employee> employee = new LinkedHashSet<Employee>();
 
     public Roles() {}
     
@@ -11,11 +15,11 @@ public class Roles {
         this.role = role;
     }
 
-    public int getId() {
-        return id;
+    public int getRoleid() {
+        return roleid;
     }
-    public void setId(int id) {
-        this.id = id;
+    public void setRoleid(int roleid) {
+        this.roleid = roleid;
     }
     public String getRole() {
         return role;
@@ -24,12 +28,20 @@ public class Roles {
         this.role = role;
     }
 
+    public Set<Employee> getEmployee() {
+        return employee;
+    }
+    public void setEmployee(Set<Employee> employee) {
+        this.employee = employee;
+    }
+    
+
     public boolean equals(Object obj) {
         if (obj == null) return false;
         if (!this.getClass().equals(obj.getClass())) return false;
 
         Roles obj2 = (Roles)obj;
-        if ((this.id == obj2.getId()) && (this.role.equals(obj2.getRole()))) {
+        if ((this.roleid == obj2.getRoleid()) && (this.role.equals(obj2.getRole()))) {
             return true;
         }
         return false;
@@ -37,7 +49,7 @@ public class Roles {
 
     public int hashCode() {
         int tmp = 0;
-        tmp = (id + role).hashCode();
+        tmp = (roleid + role).hashCode();
         return tmp;
     }
 

@@ -10,16 +10,15 @@ public class Employee {
     private Name name;
     private Address address;
     private Other other;
-    private Contact contact;
+    private Set<Contact> contact = new LinkedHashSet<Contact>();
     private Set<Roles> roles = new LinkedHashSet<Roles>();
 
     public Employee() {};
 
-    public Employee(Name name, Address address, Other other, Contact contact) {
+    public Employee(Name name, Address address, Other other) {
         this.name = name;
         this.address = address;
         this.other = other;
-        this.contact = contact;
     }
 
     public int getId() {
@@ -50,10 +49,10 @@ public class Employee {
         this.other = other;
     }
 
-    public Contact getContact() {
+    public Set<Contact> getContact() {
         return contact;
     }
-    public void setContact(Contact contact) {
+    public void setContact(Set<Contact> contact) {
         this.contact = contact;
     }
 

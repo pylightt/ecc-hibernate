@@ -9,7 +9,7 @@
             This class contains employee details.
         </meta>
 
-        <id name="id" type="int" column="id">
+        <id name="id" type="int" column="employee_id">
             <generator class="increment"/>
         </id>
 
@@ -34,18 +34,32 @@
             <property name="hireDate" column="hire_date" type="string"/>
             <property name="isHired" column="hire_status" type="boolean"/>
         </component>
-        
-        <component name="contact" class="Contact">
-            <property name="landline" column="landline" type="string"/>
-            <property name="mobile" column="mobile" type="string"/>
-            <property name="email" column="email" type="string"/>
-        </component>
 
-        <set name="roles" cascade="all">
+        <set name="contact" cascade="all" lazy="true">
             <key column="employee_id"/>
-            <one-to-many class="Roles"/>
+            <one-to-many class="Contact"/>
         </set>
-               
+        
+        <set name="roles" table="employee_roles" lazy="false" cascade="all">
+            <key column="employee_id"/>
+            <many-to-many column="role_id" class="Roles"/>
+        </set>          
+    </class>
+
+    <class name="Contact" table="contact">
+        <meta attribute="class-description">
+            This class contains employee contact information.
+        </meta>
+
+        <id name="contactid" type="int" column="contact_id">
+            <generator class="increment"/>
+        </id>
+        
+        <property name="landline" column="landline" type="string"/>
+        <property name="mobile" column="mobile" type="string"/>
+        <property name="email" column="email" type="string"/>
+
+        <many-to-one name="employee" class="Employee" column="employee_id" not-null="true"/>     
     </class>
 
     <class name="Roles" table="roles">
@@ -53,11 +67,16 @@
             This class contains employee roles.
         </meta>
 
-        <id name="id" type="int" column="id">
+        <id name="roleid" column="role_id">
             <generator class="increment"/>
         </id>
 
         <property name="role" column="role" type="string"/>
 
+        <set name="employee" table="employee_roles" lazy="false" cascade="all">
+            <key column="role_id"/>
+            <many-to-many column="employee_id" class="Employee"/>
+                
+        </set>
     </class>
 </hibernate-mapping>
