@@ -36,7 +36,7 @@ public class Util {
         return integer;
     }
 
-    public double getDouble(String text) {
+    public Double getDouble(String text) {
         System.out.print(text);
         double value = Double.parseDouble(scan.nextLine());
         return value;
@@ -53,6 +53,5 @@ public class Util {
             isHired = false; 
         } 
         return isHired;
-    }
-    
+    } 
 }

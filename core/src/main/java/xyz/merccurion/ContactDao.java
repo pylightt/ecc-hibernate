@@ -19,7 +19,6 @@ public class ContactDao {
 
         session.save(contact);
         transaction.commit();
-
         session.close();
     }
 
@@ -35,23 +34,23 @@ public class ContactDao {
         return contact;
     }
 
-    public void updateContact(Contact contact) {
-        factory = util.getSessionFactory();
-        session = factory.openSession();           
-        transaction = session.beginTransaction();
-
-        session.update(contact);
-        transaction.commit();
-
-        session.close();
-    }
-
     public void deleteContact(Contact contact) {
         factory = util.getSessionFactory();
         session = factory.openSession();           
         transaction = session.beginTransaction();
 
         session.delete(contact);
+        transaction.commit();
+
+        session.close();
+    }
+
+    public void updateContact(Contact contact) {
+        factory = util.getSessionFactory();
+        session = factory.openSession();           
+        transaction = session.beginTransaction();
+
+        session.update(contact);
         transaction.commit();
 
         session.close();

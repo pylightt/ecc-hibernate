@@ -6,7 +6,6 @@ import java.util.Set;
 
 public class Employee {
     private int id;
-
     private Name name;
     private Address address;
     private Other other;
@@ -62,6 +61,4 @@ public class Employee {
     public void setRoles(Set<Roles> roles) {
         this.roles = roles;
     }
-    
-
 }

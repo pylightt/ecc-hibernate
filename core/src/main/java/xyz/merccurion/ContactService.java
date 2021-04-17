@@ -5,14 +5,9 @@ public class ContactService {
     Util util = new Util();
 
     public Contact addContactDetails() {
-
         String landline = util.getString("Landline: ");
         String mobile = util.getString("Mobile: ");
         String email = util.getString("email: ");
-
-        // String landline = "375-1495";
-        // String mobile = "09152435453";
-        // String email = "jlacson@exist.com";
 
         Contact contact = new Contact(landline,mobile,email);
 
@@ -38,7 +33,6 @@ public class ContactService {
 
     public Contact updateContactDetails(Contact contact, int id) {
         String update;
-        
         switch(id) {
             case 1: // landline
                 update = util.getString("Updated landline: ");
@@ -54,12 +48,9 @@ public class ContactService {
                 update = util.getString("Updated email: ");
                 contact.setEmail(update);
                 break;
-
         }
         ContactDao cDao = new ContactDao();
         cDao.updateContact(contact);
         return contact;
-    }
-
-    
+    }  
 }

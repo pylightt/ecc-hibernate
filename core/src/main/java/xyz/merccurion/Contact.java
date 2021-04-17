@@ -1,7 +1,6 @@
 package xyz.merccurion;
 
 public class Contact {
-
     private int contactid;
     private String landline;
     private String mobile;
@@ -9,6 +8,7 @@ public class Contact {
     private Employee employee = new Employee();
 
     public Contact() {}
+
     public Contact(String landline, String mobile, String email){
         this.landline = landline;
         this.mobile = mobile;

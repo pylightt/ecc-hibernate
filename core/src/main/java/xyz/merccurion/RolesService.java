@@ -16,16 +16,16 @@ public class RolesService {
         rDao.addRole(role);
     }
     
-    public void deleteRole(int id) {
-        RolesDao rDao = new RolesDao();
-        Roles role = rDao.getRole(id);
-        rDao.deleteRole(role);
-    }
-
     public Roles getRole(int id) {
         RolesDao rDao = new RolesDao();
         Roles role = rDao.getRole(id);
         return role;
+    }
+    
+    public void deleteRole(int id) {
+        RolesDao rDao = new RolesDao();
+        Roles role = rDao.getRole(id);
+        rDao.deleteRole(role);
     }
 
     public List<Roles> listRoles() {

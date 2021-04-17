@@ -21,17 +21,6 @@ public class RolesDao {
 
         session.save(role);
         transaction.commit();
-
-        session.close();
-    }
-
-    public void deleteRole(Roles role) {
-        factory = util.getSessionFactory();
-        session = factory.openSession();           
-        transaction = session.beginTransaction();
-
-        session.delete(role);
-        transaction.commit();
         session.close();
     }
 
@@ -47,14 +36,13 @@ public class RolesDao {
         return role;
     }
 
-    public void updateRole(Roles role) {
+    public void deleteRole(Roles role) {
         factory = util.getSessionFactory();
         session = factory.openSession();           
         transaction = session.beginTransaction();
 
-        session.update(role);
+        session.delete(role);
         transaction.commit();
-
         session.close();
     }
 
@@ -69,4 +57,14 @@ public class RolesDao {
         session.close();
         return rolesList;
     }
+
+    public void updateRole(Roles role) {
+        factory = util.getSessionFactory();
+        session = factory.openSession();           
+        transaction = session.beginTransaction();
+
+        session.update(role);
+        transaction.commit();
+        session.close();
+    }  
 }

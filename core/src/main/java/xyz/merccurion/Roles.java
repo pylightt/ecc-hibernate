@@ -3,8 +3,7 @@ package xyz.merccurion;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class Roles {
-    
+public class Roles {   
     private int roleid;
     private String role;
     private Set<Employee> employee = new LinkedHashSet<Employee>();
@@ -52,5 +51,4 @@ public class Roles {
         tmp = (roleid + role).hashCode();
         return tmp;
     }
-
 }

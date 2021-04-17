@@ -1,7 +1,11 @@
 package xyz.merccurion;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+
+import java.lang.Double;
 
 public class Main {
     public static void main(String[] args) {
@@ -64,15 +68,50 @@ public class Main {
                 int updateId = util.getInt("Enter employee's id to udpate: ");
                 employeeUpdateOptions();
                 int chooseUpdate = util.getInt("Choose entry to update: ");
-
+                if(chooseUpdate == 14) chooseMenu();
                 try {
                     Employee employeeDetails = eService.getEmployee(updateId);
                     eService.updateEmployeeDetails(employeeDetails, chooseUpdate);
                 } catch(Exception e) {}
                 break;
-            
+                
             case 4: // list employees
-            
+                listOrderOptions();
+                int chooseOrder = util.getInt("Choose list order: ");
+                switch (chooseOrder) {
+                    case 1: // GWA
+                        List<Employee> allEmployeeList = eService.listEmployee();
+                        List<Double> gwaList = new ArrayList<Double>();
+                        List<Employee> orderedGwaList = new ArrayList<Employee>();
+                        for (Employee perEmployee : allEmployeeList) {
+                            gwaList.add(perEmployee.getOther().getGwa());
+                        }
+                        Collections.sort(gwaList);
+                        for(Double gwa : gwaList) {
+                            for (Employee perEmployee : allEmployeeList) {
+                                if (perEmployee.getOther().getGwa().equals(gwa)) {
+                                    orderedGwaList.add(perEmployee);
+                                }
+                            }
+                        }
+                        printOrderedEmployee(orderedGwaList);
+                        break;
+                    case 2: // Hire date
+                        List<Employee> hireDateList = eService.listEmployeeByHireDate();
+                        printOrderedEmployee(hireDateList);
+                        break;
+                    case 3: // Lastname
+                        List<Employee> lastnameList = eService.listEmployeeByLastname();
+                        printOrderedEmployee(lastnameList);
+                        break;
+                    case 4: // exit to menu
+                        chooseMenu();
+                        break;
+                    default: 
+                        System.out.println("Try again.");
+                        menu(choose);
+                }
+                break;
             case 5: // add employee role
                 int employeeIdAddRole = util.getInt("Enter employee's id to add role to: ");
                 int roleId = util.getInt("Enter role id to add to employee: ");
@@ -122,6 +161,7 @@ public class Main {
 
                     contactUpdateOptions();
                     int chooseContactUpdate = util.getInt("Choose entry to update: ");
+                    if(chooseContactUpdate == 4) chooseMenu();
                     cService.updateContactDetails(contactDetails, chooseContactUpdate);
                 } catch(Exception e) {}
                 break;
@@ -162,7 +202,6 @@ public class Main {
                 break;
             case 14: // exit menu
                 System.exit(0);  
-
         }
     }
     
@@ -182,7 +221,7 @@ public class Main {
             "11: Update Role\n" +
             "12: Delete Role\n" +
             "13: List Roles\n" +
-            "14: Exit Menu\n";
+            "14: Exit\n";
         
         System.out.println(text);
     }
@@ -201,7 +240,8 @@ public class Main {
             "10: Birthday\n" +
             "11: GWA\n" +
             "12: Hire date\n" +
-            "13: Employment status\n";
+            "13: Employment status\n\n" +
+            "14: Exit to menu\n";
 
         System.out.println(text);
     }
@@ -210,8 +250,65 @@ public class Main {
         String text = "\n" +
                 "1: Landline\n" +
                 "2: Mobile\n" +
-                "3: email\n";
+                "3: Email\n\n" +
+                "4. Exit to menu\n";
 
         System.out.println(text);
+    }
+
+    static void listOrderOptions() {
+        String text = "\n" +
+                "1: By GWA\n" +
+                "2: By date hired\n" +
+                "3: By last name\n\n" +
+                "4: Exit to menu\n";
+
+        System.out.println(text);
+    }
+
+    static void printOrderedEmployee(List<Employee> employeeList) {
+        for(Employee perEmployee : employeeList) {
+            System.out.print ("\n\n" + "[id:" +
+                                perEmployee.getId() + "] " +
+                                perEmployee.getName().getTitle() + " " +
+                                perEmployee.getName().getLastName() + ", " +
+                                perEmployee.getName().getFirstName() + " " +
+                                perEmployee.getName().getMiddleName() + " " +
+                                perEmployee.getName().getSuffix() + "\n\t" +
+                                "Address: " +
+                                perEmployee.getAddress().getStreetNo()  + " " +
+                                perEmployee.getAddress().getBarangay()  + ", " +
+                                perEmployee.getAddress().getCity()  + " City, " +
+                                perEmployee.getAddress().getZip()  + "\n\t" +
+                                "Other Info:\n" ); 
+                             
+            System.out.print( "\t\t" + 
+                                "Birthday: " +
+                                perEmployee.getOther().getBirthday() + "\n\t\t");
+            System.out.printf(  "GWA: %.2f", perEmployee.getOther().getGwa());
+            System.out.print(   "\n\t\t" +
+                                "Hire date: " +
+                                perEmployee.getOther().getHireDate() + "\n\t\t" +
+                                "Currently employed?: " +
+                                perEmployee.getOther().getIsHired() + "\n\t" +
+                                "Contact Info:" );
+
+            Set<Contact> contactList = perEmployee.getContact();                   
+            for(Contact perContact : contactList) {
+                System.out.print(   "\n\t\t" + 
+                                    "Landline: " +
+                                    perContact.getLandline() + "\n\t\t" +
+                                    "Mobile: " +
+                                    perContact.getMobile() + "\n\t\t" +
+                                    "E-mail: " +
+                                    perContact.getEmail() + "\n");
+            }
+            System.out.print("\tRoles:");
+            Set<Roles> rolesList = perEmployee.getRoles();
+            for(Roles perRole : rolesList) {
+                System.out.print("\n\t\t" + perRole.getRole());
+            }
+            System.out.println();
+        }
     }
 }

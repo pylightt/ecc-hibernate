@@ -1,7 +1,6 @@
 package xyz.merccurion;
 
 public class Other {
-
     private String birthday;
     private double gwa;
     private String hireDate;
@@ -23,7 +22,7 @@ public class Other {
        this.birthday = birthday;
     }
 
-    public double getGwa() {
+    public Double getGwa() {
         return gwa;
     }
     public void setGwa(double gwa) {
